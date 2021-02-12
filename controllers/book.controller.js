@@ -22,15 +22,15 @@ exports.addBook = async (req, res) => {
     title: req.body.title,
     author: req.body.author,
     page: req.body.page,
-    // key: req.body.key,
-    // link: req.body.link,
-    // readed: req.body.readed,
-    // available: req.body.available,
-    // ama: req.body.ama,
-    // bbc: req.body.bbc,
-    // emp: req.body.emp,
-    // gan: req.body.gan,
-    // pozy: req.body.pozy,
+    key: req.body.key,
+    link: req.body.link,
+    readed: req.body.readed,
+    available: req.body.available,
+    ama: req.body.ama,
+    bbc: req.body.bbc,
+    emp: req.body.emp,
+    gan: req.body.gan,
+    pozy: req.body.pozy,
   });
   try {
     const savedBook = await book.save();
@@ -45,6 +45,33 @@ exports.deleteBook = async (req, res) => {
   try {
     const deleteBook = await Book.remove({ _id: req.params.id });
     res.json(deleteBook);
+  } catch (error) {
+    res.json({ message: error });
+  }
+};
+// update Book
+exports.updateBook = async (req, res) => {
+  try {
+    const updatedBook = await Book.updateOne(
+      { _id: req.params.id },
+      {
+        $set: {
+          title: req.body.title,
+          author: req.body.author,
+          page: req.body.page,
+          key: req.body.key,
+          link: req.body.link,
+          readed: req.body.readed,
+          available: req.body.available,
+          ama: req.body.ama,
+          bbc: req.body.bbc,
+          emp: req.body.emp,
+          gan: req.body.gan,
+          pozy: req.body.pozy,
+        },
+      }
+    );
+    res.json(updatedBook);
   } catch (error) {
     res.json({ message: error });
   }

@@ -11,4 +11,6 @@ router.route("/books").post(BookController.addBook);
 
 router.route("/book/:id").delete(BookController.deleteBook);
 
+router.route("/book/:id").patch(BookController.updateBook);
+
 module.exports = router;
